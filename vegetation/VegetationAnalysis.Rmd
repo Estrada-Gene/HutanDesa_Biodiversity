@@ -1,0 +1,86 @@
+---
+title: "HutanDesa_Vegetation"
+author: "Gene Estrada"
+date: "2023-10-27"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(vegan)
+
+#reading in vegetation data from 2016 HD survey 
+v <- read.csv(file = "Veg_2016.csv", header = TRUE, na.strings = c("", " "))
+
+#creating a column for Latin Binomial for rows that have both Genus and Species ID's
+v$scientific.name <- ifelse(!is.na(v$Genus) & !is.na(v$Species), 
+                            paste(v$Genus, v$Species, sep = " "), 
+                            NA)
+```
+
+#### Exploration
+
+Starting with the 2016 vegetation data, which covers four Hutan Desas: Nipah Kuning, Padu Banjar, Pamangkat, and Pulau Kumbang.
+```{r}
+#it looks like all stems except 34 were ID'd to the species level
+table(is.na(v$Species))
+
+#only one stem did not have an ID to the genus level
+table(is.na(v$Genus))
+```
+
+#### Vegetation Diversity
+
+2016 data - 
+Table showing counts of plant species by Hutan Desa 
+```{r}
+species_table <- v %>%
+  group_by(Location, scientific.name) %>%
+  filter(!is.na(scientific.name)) %>%
+  summarise(count = n()) %>%
+  pivot_wider(names_from = Location, values_from = count, values_fill = 0) %>%
+  arrange(desc(`Nipah Kuning`))
+
+print(species_table, n = nrow(species_table))  
+```
+
+
+Table showing counts of plant genera by Hutan Desa
+```{r}
+genus_table <- v %>%
+  group_by(Location, Genus) %>%
+  filter(!is.na(Genus)) %>%
+  summarise(count = n()) %>%
+  pivot_wider(names_from = Location, values_from = count, values_fill = 0) %>%
+  arrange(desc(`Nipah Kuning`))
+
+print(genus_table, n = nrow(genus_table))  
+```
+
+
+Comparing plant species composition and diversity by Hutan Desa
+```{r}
+# Calculate species richness by site
+species_richness <- v %>%
+  group_by(Location) %>%
+  summarise(SpeciesRichness = length(unique(scientific.name))) %>%
+  arrange(desc(SpeciesRichness))
+
+# Calculate Shannon diversity index by site
+shannon_index <- diversity(table(v$Location, v$scientific.name), index = "shannon")
+shannon_index <- rownames_to_column(as.data.frame(shannon_index), var = "Location")
+
+# Calculate Simpson diversity index by site
+simpson_index <- diversity(table(v$Location, v$scientific.name), index = "simpson")
+simpson_index <- rownames_to_column(as.data.frame(simpson_index), var = "Location")
+
+#create summary table
+veg_summary <- merge(species_richness, shannon_index, by = "Location")
+veg_summary <- merge(veg_summary, simpson_index, by = "Location")
+veg_summary
+```
+
+
+Ordination analysis 
