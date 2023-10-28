@@ -3,10 +3,13 @@ title: "HutanDesa_Vegetation"
 author: "Gene Estrada"
 date: "2023-10-27"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+setwd("~/HutanDesa_Biodiversity/vegetation")
 
 library(tidyverse)
 library(vegan)
@@ -14,9 +17,27 @@ library(vegan)
 #reading in vegetation data from 2016 HD survey 
 v <- read.csv(file = "Veg_2016.csv", header = TRUE, na.strings = c("", " "))
 
+#reading in vegetation data from 2021 
+v21 <- read.csv(file = "Veg_2021.csv", header = TRUE, na.strings = c("", " "))
+loc <- read.csv(file = "PlotsCoding_2021.csv", header = TRUE)
+
+v21 <- left_join(v21, loc[,c("survey.area", "transect", "plot", "loc")], by = "plot")
+
+v21$loc[v21$loc == "nipah.kuning"] <- "Nipah Kuning"
+v21$loc[v21$loc == "padu.banjar"] <- "Padu Banjar"
+v21$loc[v21$loc == "pemangkat"] <- "Pemangkat"
+v21$loc[v21$loc == "penjalaan"] <- "Penjalaan"
+v21$loc[v21$loc == "pulau.kumbang"] <- "Pulau Kumbang"
+v21$loc[v21$loc == "rantau.panjang"] <- "Rantau Panjang"
+
+
 #creating a column for Latin Binomial for rows that have both Genus and Species ID's
 v$scientific.name <- ifelse(!is.na(v$Genus) & !is.na(v$Species), 
                             paste(v$Genus, v$Species, sep = " "), 
+                            NA)
+
+v21$scientific.name <- ifelse(!is.na(v21$genus) & !is.na(v21$species), 
+                            paste(v21$genus, v21$species, sep = " "), 
                             NA)
 ```
 
@@ -30,6 +51,17 @@ table(is.na(v$Species))
 #only one stem did not have an ID to the genus level
 table(is.na(v$Genus))
 ```
+
+
+The 2021 surveys cover the same HD sites as above, plus Penjalaan and Rantau Panjang
+```{r}
+#all but 46 stems were ID'd to the species level
+table(is.na(v21$species))
+
+#all were ID'd to the genus level
+table(is.na(v21$genus))
+```
+
 
 #### Vegetation Diversity
 
@@ -83,4 +115,106 @@ veg_summary
 ```
 
 
-Ordination analysis 
+2021 data - 
+Table showing counts of plant species by Hutan Desa 
+```{r}
+species_table_21 <- v21 %>%
+  group_by(loc, scientific.name) %>%
+  filter(!is.na(scientific.name)) %>%
+  summarise(count = n()) %>%
+  pivot_wider(names_from = loc, values_from = count, values_fill = 0) %>%
+  arrange(desc(`Nipah Kuning`))
+
+print(species_table_21, n = nrow(species_table_21))  
+```
+
+Table showing counts of plant genera by Hutan Desa
+```{r}
+genus_table_21 <- v21 %>%
+  group_by(loc, genus) %>%
+  filter(!is.na(genus)) %>%
+  summarise(count = n()) %>%
+  pivot_wider(names_from = loc, values_from = count, values_fill = 0) %>%
+  arrange(desc(`Nipah Kuning`))
+
+print(genus_table_21, n = nrow(genus_table_21))  
+```
+
+Comparing plant species composition and diversity by Hutan Desa
+```{r}
+# Calculate species richness by site
+species_richness <- v21 %>%
+  group_by(loc) %>%
+  summarise(SpeciesRichness = length(unique(scientific.name))) %>%
+  arrange(desc(SpeciesRichness))
+
+# Calculate Shannon diversity index by site
+shannon_index <- diversity(table(v21$loc, v21$scientific.name), index = "shannon")
+shannon_index <- rownames_to_column(as.data.frame(shannon_index), var = "loc")
+
+# Calculate Simpson diversity index by site
+simpson_index <- diversity(table(v21$loc, v21$scientific.name), index = "simpson")
+simpson_index <- rownames_to_column(as.data.frame(simpson_index), var = "loc")
+
+#create summary table
+veg_summary_21 <- merge(species_richness, shannon_index, by = "loc")
+veg_summary_21 <- merge(veg_summary_21, simpson_index, by = "loc")
+veg_summary_21
+```
+
+
+Ordination analysis - ***still working on this
+```{r}
+#get data in right format - I think I need to not group by site here, and by survey/transect instead
+t1 <- v %>%
+  group_by(Location, scientific.name) %>%
+  filter(!is.na(scientific.name)) %>%
+  summarise(count = n()) %>%
+  pivot_wider(names_from = scientific.name, values_from = count, values_fill = 0)
+
+#run ordination
+MDS1 <- metaMDS(t1[,-1], distance = "euclidean")
+
+#plot
+plot(MDS1, type = "points")
+ordihull(MDS1, groups = 1:4, col = "green", draw = "polygon")
+```
+
+
+#### Structural Comparison
+
+Using structural metrics DBH and Tree height to compare Hutan Desa sites. There doesn't seem to be much difference here. I'm not sure that I'll be using these metrics moving forward, so just visually assessing for now. 
+
+2016 data - 
+Tree DBH - one obvious outlier here in the Pemangkat site
+```{r}
+ggplot(v, aes(x = DBH, y = Location)) +
+  geom_violin() + 
+  geom_boxplot(width=0.3, alpha=0.2) +
+  geom_jitter(height = .1, alpha = 0.2) + 
+  labs(title = "Tree Diameters at Hutan Desa Sites (2016)",
+       x = "DBH (cm)", y = "") +
+  theme_minimal()
+```
+
+Tree height - no obvious differences here
+```{r}
+ggplot(v, aes(x = Tree.Height, y = Location)) +
+  geom_violin() + 
+  geom_boxplot(width=0.3, alpha=0.2) +
+  geom_jitter(height = .1, alpha = 0.2) + 
+  labs(title = "Tree Height at Hutan Desa Sites (2016)",
+       x = "height (m)", y = "") +
+  theme_minimal()
+```
+
+2021 data - only has DBH
+```{r}
+ggplot(v21, aes(x = dbh, y = loc)) +
+  geom_violin() + 
+  geom_boxplot(width=0.3, alpha=0.2) +
+  geom_jitter(height = .1, alpha = 0.2) + 
+  labs(title = "Tree Diameters at Hutan Desa Sites (2021)",
+       x = "DBH (cm)", y = "") +
+  theme_minimal()
+```
