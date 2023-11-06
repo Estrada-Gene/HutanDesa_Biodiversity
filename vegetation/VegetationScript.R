@@ -157,7 +157,7 @@ pheno$scientific.name <- ifelse(!is.na(pheno$genus) & !is.na(pheno$species),
 
 #species table - not many species, this might be due to a lack of stems ID'd to the species level
 species_table_CPRS <- pheno %>%
-  filter(hab_unbiased == "PS" & pheno_year == "2015") %>%
+  filter(hab_unbiased == "PS" & pheno_year == "2016") %>%
   group_by(scientific.name) %>%
   filter(!is.na(scientific.name)) %>%
   summarise(count = n()) %>%
@@ -167,7 +167,7 @@ print(species_table_CPRS, n = nrow(species_table_CPRS))
 
 #genus table - many more genera listed here
 genus_table_CPRS <- pheno %>%
-  filter(hab_unbiased == "PS" & pheno_year == "2015") %>%
+  filter(hab_unbiased == "PS" & pheno_year == "2016") %>%
   group_by(genus) %>%
   filter(!is.na(genus)) %>%
   summarise(count = n()) %>%

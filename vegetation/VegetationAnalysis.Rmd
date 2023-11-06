@@ -30,6 +30,33 @@ v21$loc[v21$loc == "penjalaan"] <- "Penjalaan"
 v21$loc[v21$loc == "pulau.kumbang"] <- "Pulau Kumbang"
 v21$loc[v21$loc == "rantau.panjang"] <- "Rantau Panjang"
 
+#reading in Andy's pheno data 
+pheno <- read.csv(file = "Jul2015-Sep2020_pheno_AJM.csv", header = TRUE)
+pheno$hab_unbiased <- factor(pheno$hab_unbiased, levels = c("PS", "FS", "AB", "LS", "LG", "UG"))
+
+#replacing "NULL" and other odd values in the Species and Genus column with NA
+#table not in the best shape, many species spelled slightly different, will inflate species counts
+pheno$species[pheno$species == "NULL"] <- NA
+pheno$species[pheno$species == ""] <- NA
+pheno$species[pheno$species == "`"] <- NA
+pheno$genus[pheno$genus == ""] <- NA
+pheno$genus[pheno$genus == "?"] <- NA
+pheno$genus[pheno$genus == "???"] <- NA
+pheno$genus[pheno$genus == "????"] <- NA
+pheno$genus[pheno$genus == "NA"] <- NA
+
+#fixing some of the names manually - some I'm not sure what to do with
+pheno$species <- gsub("\\?", "", as.character(pheno$species))
+pheno$species[pheno$species == "zwageri"] <- "zwagerii"
+pheno$species[pheno$species == "zwageriii"] <- "zwagerii"
+pheno$species[pheno$species == "stelllatus"] <- "stellatus"
+pheno$species[pheno$species == "sp nov"] <- "spnov"
+pheno$genus[pheno$genus == "uvaria"] <- "Uvaria"
+
+#creating a column for Latin Binomial for rows that have both Genus and Species ID's
+pheno$scientific.name <- ifelse(!is.na(pheno$genus) & !is.na(pheno$species), 
+                            paste(pheno$genus, pheno$species, sep = " "), 
+                            NA)
 
 #creating a column for Latin Binomial for rows that have both Genus and Species ID's
 v$scientific.name <- ifelse(!is.na(v$Genus) & !is.na(v$Species), 
@@ -41,7 +68,7 @@ v21$scientific.name <- ifelse(!is.na(v21$genus) & !is.na(v21$species),
                             NA)
 ```
 
-#### Exploration
+### Exploration
 
 Starting with the 2016 vegetation data, which covers four Hutan Desas: Nipah Kuning, Padu Banjar, Pamangkat, and Pulau Kumbang.
 ```{r}
@@ -63,9 +90,9 @@ table(is.na(v21$genus))
 ```
 
 
-#### Vegetation Diversity
+### Vegetation Diversity
 
-2016 data - 
+#### 2016 data - 
 Table showing counts of plant species by Hutan Desa 
 ```{r}
 species_table <- v %>%
@@ -114,8 +141,30 @@ veg_summary <- merge(veg_summary, simpson_index, by = "Location")
 veg_summary
 ```
 
+Comparing plant genus composition and diversity by Hutan Desa
+```{r}
+#by genus
+genus_richness <- v %>%
+  group_by(Location) %>%
+  summarise(GenusRichness = n_distinct(Genus)) %>%
+  arrange(desc(GenusRichness))
 
-2021 data - 
+#Calculate Shannon diversity index by site
+shannon_index_gen <- diversity(table(v$Location, v$Genus), index = "shannon")
+shannon_index_gen <- rownames_to_column(as.data.frame(shannon_index_gen), var = "Location")
+
+#Calculate Simpson diversity index by site
+simpson_index_gen <- diversity(table(v$Location, v$Genus), index = "simpson")
+simpson_index_gen <- rownames_to_column(as.data.frame(simpson_index_gen), var = "Location")
+
+#create summary table
+veg_summary_gen <- merge(genus_richness, shannon_index_gen, by = "Location")
+veg_summary_gen <- merge(veg_summary_gen, simpson_index_gen, by = "Location")
+veg_summary_gen
+```
+
+
+#### 2021 data - 
 Table showing counts of plant species by Hutan Desa 
 ```{r}
 species_table_21 <- v21 %>%
@@ -181,11 +230,101 @@ ordihull(MDS1, groups = 1:4, col = "green", draw = "polygon")
 ```
 
 
-#### Structural Comparison
+#### Andy's pheno data from CPRS
+
+Creating list of species in pheno plots with counts. Note, pheno plots were not placed in the Montane (MO) forest, so there is no data here to compare for the montane. 
+
+Not many species are listed here. Looking at the data, it looks like not many stems were identified to the species level.
+```{r}
+species_table_CPRS <- pheno %>%
+  filter(hab_unbiased == "PS" & pheno_year == "2016") %>%
+  group_by(scientific.name) %>%
+  filter(!is.na(scientific.name)) %>%
+  summarise(count = n()) %>%
+  arrange(desc(count))
+
+print(species_table_CPRS, n = nrow(species_table_CPRS))  
+```
+
+Doing the same thing again but for genus. Many more stems were identified to the genus level. 
+```{r}
+genus_table_CPRS <- pheno %>%
+  filter(hab_unbiased == "PS" & pheno_year == "2016") %>%
+  group_by(genus) %>%
+  filter(!is.na(genus)) %>%
+  summarise(count = n()) %>%
+  arrange(desc(count))
+
+print(genus_table_CPRS, n = nrow(genus_table_CPRS))  
+```
+
+Calculating plant species diversity indices by forest type at CPRS
+```{r}
+# Calculate species richness by site
+species_richness_CPRS <- pheno %>%
+  group_by(hab_unbiased) %>%
+  summarise(SpeciesRichness = n_distinct(scientific.name)) %>%
+  arrange(desc(SpeciesRichness))
+
+# Calculate Shannon diversity index by site
+shannon_index_CPRS <- diversity(table(pheno$hab_unbiased, pheno$scientific.name), index = "shannon")
+shannon_index_CPRS <- rownames_to_column(as.data.frame(shannon_index_CPRS), var = "hab_unbiased")
+
+# Calculate Simpson diversity index by site
+simpson_index_CPRS <- diversity(table(pheno$hab_unbiased, pheno$scientific.name), index = "simpson")
+simpson_index_CPRS <- rownames_to_column(as.data.frame(simpson_index_CPRS), var = "hab_unbiased")
+
+#create summary table
+veg_summary_CPRS <- merge(species_richness_CPRS, shannon_index_CPRS, by = "hab_unbiased")
+veg_summary_CPRS <- merge(veg_summary_CPRS, simpson_index_CPRS, by = "hab_unbiased")
+
+veg_summary_CPRS %>%
+  arrange(desc(hab_unbiased))
+```
+
+Calculating plant genus diversity indices by forest type at CPRS. It might make sense to use these indices for comparison to the Hutan Desa, at least from Andy's data, given the lack of species ID's, as seen above. 
+```{r}
+# Calculate species richness by site
+genus_richness_CPRS <- pheno %>%
+  group_by(hab_unbiased) %>%
+  summarise(GenusRichness = n_distinct(genus))
+
+# Calculate Shannon diversity index by site
+shannon_index_CPRS_gen <- diversity(table(pheno$hab_unbiased, pheno$genus), index = "shannon")
+shannon_index_CPRS_gen <- rownames_to_column(as.data.frame(shannon_index_CPRS_gen), var = "hab_unbiased")
+
+# Calculate Simpson diversity index by site
+simpson_index_CPRS_gen <- diversity(table(pheno$hab_unbiased, pheno$genus), index = "simpson")
+simpson_index_CPRS_gen <- rownames_to_column(as.data.frame(simpson_index_CPRS_gen), var = "hab_unbiased")
+
+#create summary table
+veg_summary_CPRS_gen <- merge(genus_richness_CPRS, shannon_index_CPRS_gen, by = "hab_unbiased")
+veg_summary_CPRS_gen <- merge(veg_summary_CPRS_gen, simpson_index_CPRS_gen, by = "hab_unbiased")
+
+veg_summary_CPRS_gen %>%
+  arrange(desc(hab_unbiased))
+```
+
+
+Comparing plant species diversity between CPRS forests and HD sites. Again, if using Andy's data moving forward in any way, comparing these values at the genus level might be best. 
+```{r}
+#by species
+colnames(veg_summary_CPRS) <- c("Location", "SpeciesRichness", "shannon_index", "simpson_index")
+veg_summary_CPRS <- veg_summary_CPRS %>% arrange(Location)
+rbind(veg_summary, veg_summary_CPRS)
+
+#by genus
+colnames(veg_summary_CPRS_gen) <- c("Location", "GenusRichness", "shannon_index_gen", "simpson_index_gen")
+veg_summary_CPRS_gen <- veg_summary_CPRS_gen %>% arrange(Location)
+rbind(veg_summary_gen, veg_summary_CPRS_gen)
+```
+
+
+### Structural Comparison
 
 Using structural metrics DBH and Tree height to compare Hutan Desa sites. There doesn't seem to be much difference here. I'm not sure that I'll be using these metrics moving forward, so just visually assessing for now. 
 
-2016 data - 
+#### 2016 data - 
 Tree DBH - one obvious outlier here in the Pemangkat site
 ```{r}
 ggplot(v, aes(x = DBH, y = Location)) +
@@ -208,7 +347,7 @@ ggplot(v, aes(x = Tree.Height, y = Location)) +
   theme_minimal()
 ```
 
-2021 data - only has DBH
+#### 2021 data - only has DBH
 ```{r}
 ggplot(v21, aes(x = dbh, y = loc)) +
   geom_violin() + 
