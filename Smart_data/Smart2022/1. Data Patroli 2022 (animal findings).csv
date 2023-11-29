@@ -1,0 +1,52 @@
+Patrol ID,Type,Patrol Start Date,Patrol End Date,Station,Team,Objective,Mandate,Armed,Patrol Leg ID,Leader,Patrol Transport Type,Waypoint ID,Waypoint Date,Waypoint Time,X,Y,Last Modified,Last Modified By,Observation Category 0,Observation Category 1,Jenis kelamin satwa,Jenis satwa,Jumlah,Keterangan,Satuan,Umur satwa
+PK_Juni_0004a,Ground,19-Jun-22,19-Jun-22,Pulau Kumbang,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Andri Andri,Jalan Kaki,9,19-Jun-22,8:49:33 AM,109.8623033,-1.072133333,12/12/2022 19:07,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Cucak Rawa - Pycnonotus zeylanicus,1,,ekor,Dewasa
+NK Juli 4,Ground,29-Jul-22,29-Jul-22,Nipah Kuning,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Juhari Juhari,Jalan Kaki,11,29-Jul-22,10:51:41 AM,109.931625,-1.063186667,12/12/2022 15:31,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Owa Kalimantan - Hylobates albibarbis,1,,ekor,Dewasa
+PB_Okt_000003,Ground,28-Oct-22,28-Oct-22,Padu Banjar,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Samsidar Samsidar,Jalan Kaki,8,28-Oct-22,8:23:07 AM,109.8516317,-1.01931,12/12/2022 15:55,smart smart,Satwa Liar,Perjumpaan Satwa,Jantan dan betina,Rangkong,7,,ekor,Dewasa
+NK_Sept_004,Ground,21-Sep-22,21-Sep-22,Nipah Kuning,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Juhari Juhari,Jalan Kaki,3,21-Sep-22,10:25:16 AM,109.9337467,-1.05624,12/12/2022 15:30,smart smart,Satwa Liar,Perjumpaan Satwa,Jantan,Orangutan Kalimantan - Pongo Pygmaeus,1,,ekor,Anakan
+PK_Nov_000004,Ground,28-Nov-22,28-Nov-22,Pulau Kumbang,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Dwi Dwi,Jalan Kaki,9,28-Nov-22,9:40:47 AM,109.8652567,-1.051771667,12/12/2022 19:38,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Lebah madu - Apis dorsata,1,,kelompok,Tidak tahu
+PK_Juni_0004,Ground,19-Jun-22,19-Jun-22,Pulau Kumbang,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Andri Andri,Jalan Kaki,9,19-Jun-22,8:49:33 AM,109.8623033,-1.072133333,12/12/2022 16:10,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Cucak Rawa - Pycnonotus zeylanicus,1,,ekor,Dewasa
+PK_Nov_000003,Ground,27-Nov-22,27-Nov-22,Pulau Kumbang,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Dwi Dwi,Jalan Kaki,18,27-Nov-22,10:16:43 AM,109.8617517,-1.051763333,12/12/2022 19:38,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Piton/Sanca,1,,ekor,Tidak tahu
+PM_Okt_000003,Ground,22-Oct-22,22-Oct-22,Pemangkat,LPHD,Monitoring kawasan,Patroli Rutin,Yes,1,Samlia Samlia,Jalan Kaki,16,22-Oct-22,2:11:20 PM,109.9130083,-1.07141,12/12/2022 15:45,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Lebah madu - Apis dorsata,1,,kelompok,Dewasa
+NK_Nov_000013,Ground,27-Nov-22,27-Nov-22,Nipah Kuning,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Juhari Juhari,Jalan Kaki,7,27-Nov-22,1:47:41 PM,109.9359017,-1.06767,12/6/2022 21:29,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Lebah madu - Apis dorsata,1,,kelompok,Tidak tahu
+NK_Nov_000013,Ground,27-Nov-22,27-Nov-22,Nipah Kuning,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Juhari Juhari,Jalan Kaki,8,27-Nov-22,2:59:08 PM,109.932715,-1.05532,12/6/2022 21:29,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Orangutan Kalimantan - Pongo Pygmaeus,1,,kelompok,Anakan
+PM_Okt_000002,Ground,19-Oct-22,19-Oct-22,Pemangkat,LPHD,Monitoring kawasan,Patroli Rutin,Yes,1,Samlia Samlia,Jalan Kaki,9,19-Oct-22,9:55:56 AM,109.9064367,-1.052963333,12/12/2022 20:39,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Ular viper daun - Trimeresurus borneensis,1,,ekor,Tidak tahu
+PM_Sept_007,Ground,3-Sep-22,3-Sep-22,Pemangkat,LPHD,Monitoring kawasan,Patroli Rutin,Yes,1,Samlia Samlia,Jalan Kaki,5,3-Sep-22,9:17:07 AM,109.9101267,-1.072941667,12/12/2022 15:47,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Pelatuk merah - Picus miniaceus,2,,ekor,Dewasa
+NK_Sept_001_002_003,Ground,18-Sep-22,20-Sep-22,Nipah Kuning,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Juhari Juhari,Jalan Kaki,15,19-Sep-22,12:52:25 PM,109.933755,-1.052458333,12/12/2022 15:30,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Kubung Malaya - Galeopterus variegatus,1,,ekor,Dewasa
+RP_Agustus_2022_000001,Ground,20-Aug-22,24-Aug-22,Rantau Panjang,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Dedet Harpandi,Jalan Kaki,225,22-Aug-22,10:41:01 AM,110.061236,-1.15710103,1/3/2023 10:08,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Musang Akar - Arctogalidia trivirgata,1,,ekor,Dewasa
+PJ_September_2022_00007,Ground,27-Sep-22,27-Sep-22,Penjalaan,LPHD,Monitoring kawasan,Patroli Gabungan,No,1,Anwar Anwar,Jalan Kaki,20,27-Sep-22,12:50:16 PM,110.0619817,-1.11845,12/29/2022 22:49,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Tupai,1,,ekor,Remaja
+PJ_September_2022_00007,Ground,27-Sep-22,27-Sep-22,Penjalaan,LPHD,Monitoring kawasan,Patroli Gabungan,No,1,Anwar Anwar,Jalan Kaki,3,27-Sep-22,10:19:36 AM,110.0489767,-1.125641667,12/29/2022 22:49,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Lutung Merah - Presbytis rubicunda,3,,ekor,Dewasa
+PJ_Oktober_2022_000007,Ground,21-Oct-22,21-Oct-22,Penjalaan,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Suparjan Suparjan,Jalan Kaki,26,21-Oct-22,11:52:56 AM,110.0640367,-1.127716667,12/29/2022 22:44,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Lebah madu - Apis dorsata,1,,kelompok,Tidak tahu
+RP_Nov_2022_000004,Ground,27-Nov-22,27-Nov-22,Rantau Panjang,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Muhammad HR HR,Jalan Kaki,6,27-Nov-22,9:24:31 AM,110.0467267,-1.139908333,12/29/2022 15:47,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Enggang Jambul - Berenicornis comatus,2,,ekor,Dewasa
+PJ_Nov_2022_000005,Ground,24-Nov-22,24-Nov-22,Penjalaan,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Suparjan Suparjan,Jalan Kaki,5,24-Nov-22,8:38:03 AM,110.05356,-1.131823333,12/29/2022 15:42,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Lutung Merah - Presbytis rubicunda,2,,ekor,Tidak tahu
+PJ_Nov_2022_000005,Ground,24-Nov-22,24-Nov-22,Penjalaan,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Suparjan Suparjan,Jalan Kaki,6,24-Nov-22,8:41:19 AM,110.05428,-1.131486667,12/29/2022 15:42,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Orangutan Kalimantan - Pongo Pygmaeus,1,,ekor,Dewasa
+PJ_Nov_2022_000005,Ground,24-Nov-22,24-Nov-22,Penjalaan,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Suparjan Suparjan,Jalan Kaki,25,24-Nov-22,12:13:25 PM,110.0694133,-1.132278333,12/29/2022 15:42,smart smart,Satwa Liar,Perjumpaan Satwa,Betina,Orangutan Kalimantan - Pongo Pygmaeus,2,,ekor,Tidak tahu
+PJ_Mei_2022_000002,Ground,22-May-22,22-May-22,Penjalaan,LPHD,Monitoring kawasan,Monitoring,No,1,Anwar Anwar,Jalan Kaki,13,22-May-22,9:14:13 AM,110.0561333,-1.124791667,1/3/2023 9:36,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Lutung Merah - Presbytis rubicunda,2,,ekor,Tidak tahu
+PJ_Des_2022_00006,Ground,18-Dec-22,18-Dec-22,Penjalaan,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Suparjan Suparjan,Jalan Kaki,11,18-Dec-22,10:28:16 AM,110.0658183,-1.134585,12/23/2022 10:58,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Elang,1,,ekor,Remaja
+RP_Oktober_2022_000003,Ground,20-Oct-22,20-Oct-22,Rantau Panjang,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Rudiansyah Rudiansyah,Jalan Kaki,19,20-Oct-22,10:49:56 AM,110.052345,-1.142801667,1/3/2023 9:43,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Kura-kura Air Tawar Beiyogo - Notochelys platynota,1,,ekor,Dewasa
+PJ_September_2022_00009,Ground,29-Sep-22,29-Sep-22,Penjalaan,LPHD,Monitoring kawasan,Patroli Gabungan,No,1,Anwar Anwar,Jalan Kaki,2,29-Sep-22,9:38:12 AM,110.0484933,-1.125901667,12/29/2022 22:49,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Betet,4,,ekor,Remaja
+RP_Oktober_2022_000002,Ground,19-Oct-22,19-Oct-22,Rantau Panjang,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Rudiansyah Rudiansyah,Jalan Kaki,3,19-Oct-22,8:06:35 AM,110.0394533,-1.143493333,1/3/2023 9:43,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Elang,1,,ekor,Tidak tahu
+RP_Oktober_2022_000002,Ground,19-Oct-22,19-Oct-22,Rantau Panjang,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Rudiansyah Rudiansyah,Jalan Kaki,35,19-Oct-22,12:24:24 PM,110.0472083,-1.143616667,1/3/2023 9:43,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,,1,,ekor,Dewasa
+RP_September_000001,Ground,26-Sep-22,30-Sep-22,Rantau Panjang,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Rudiansyah Rudiansyah,Jalan Kaki,713,29-Sep-22,10:13:15 AM,110.060926,-1.151367975,1/3/2023 9:58,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Burung,1,,ekor,Dewasa
+RP_September_000001,Ground,26-Sep-22,30-Sep-22,Rantau Panjang,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Rudiansyah Rudiansyah,Jalan Kaki,690,28-Sep-22,10:30:22 AM,110.064598,-1.14539302,1/3/2023 9:58,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Enggang Klihingan - Anorrhinus galeritus,2,,ekor,Tidak tahu
+RP_September_000001,Ground,26-Sep-22,30-Sep-22,Rantau Panjang,LPHD,Monitoring kawasan,Patroli Rutin,No,1,Rudiansyah Rudiansyah,Jalan Kaki,656,27-Sep-22,8:47:39 AM,110.059419,-1.150252009,1/3/2023 9:58,smart smart,Satwa Liar,Perjumpaan Satwa,Tidak tahu,Reptil,1,,ekor,Tidak tahu
+PJ_Agustus_2022_0002,Ground,6-Aug-22,6-Aug-22,Penjalaan,LPHD,Monitoring kawasan,Monitoring,No,1,Anwar Anwar,Jalan Kaki,16,6-Aug-22,11:11:15 AM,110.0484917,-1.130973333,12/29/2022 22:54,smart smart,Satwa Liar,Perjumpaan Satwa,Jantan dan betina,Bekantan - Nasalis larvatus,5,,ekor,Dewasa
+,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,
